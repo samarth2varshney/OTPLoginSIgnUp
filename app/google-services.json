@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "155103326769",
+    "project_id": "drive-32e83",
+    "storage_bucket": "drive-32e83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155103326769:android:cb54ee91aa7285fd76db10",
+        "android_client_info": {
+          "package_name": "com.example.drive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155103326769-bl5skbuktu6jtvfe4jhj9boa7h1eu304.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drive",
+            "certificate_hash": "52ab11789294f6f4c3cd45e84c3ea07702ef381b"
+          }
+        },
+        {
+          "client_id": "155103326769-amm925l85150fgjq0v3i95qn7rp3rrt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiN2SN_JTrUYWX-VJ2MAQ_RCWs94Qe48g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155103326769-amm925l85150fgjq0v3i95qn7rp3rrt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
