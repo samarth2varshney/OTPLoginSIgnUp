@@ -13,16 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Drive"
         tools:targetApi="31">
-        <activity
-            android:name="retor_fit.Main3Activity"
-            android:exported="true">
 
-         </activity>
         <activity
             android:name=".OPTActivity"
+            android:theme="@style/NoActionBar"
             android:exported="false" />
         <activity
             android:name=".PhoneActivity"
+            android:theme="@style/NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,12 +31,6 @@
         <activity
             android:name=".MainActivity2"
             android:exported="false" />
-        <activity
-            android:name=".cryptography"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
     </application>
 
 </manifest>

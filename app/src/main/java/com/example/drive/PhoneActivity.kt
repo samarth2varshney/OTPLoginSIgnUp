@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.FirebaseException
@@ -20,11 +21,29 @@ class PhoneActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var number : String
     private lateinit var mProgressBar : ProgressBar
+    private lateinit var button1:Button
+    private lateinit var button2:Button
+    private lateinit var button3:Button
+    private lateinit var button4:Button
+    private lateinit var button5:Button
+    private lateinit var button6:Button
+    private lateinit var button7:Button
+    private lateinit var button8:Button
+    private lateinit var button9:Button
+    private lateinit var button0:Button
+    private lateinit var backspace:ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phone)
 
         init()
+        buttonclick()
+
+        backspace.setOnClickListener {
+            eraseText()
+        }
+
         sendOTPBtn.setOnClickListener {
             number = phoneNumberET.text.trim().toString()
             if (number.isNotEmpty()){
@@ -33,7 +52,7 @@ class PhoneActivity : AppCompatActivity() {
                     mProgressBar.visibility = View.VISIBLE
                     val options = PhoneAuthOptions.newBuilder(auth)
                         .setPhoneNumber(number)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setTimeout(0L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
                         .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
                         .build()
@@ -49,12 +68,68 @@ class PhoneActivity : AppCompatActivity() {
         }
     }
 
+    fun eraseText(){
+        val text = phoneNumberET.text.toString()
+        if (text.isNotEmpty()) {
+            val cursorPosition = phoneNumberET.selectionStart
+            val modifiedText = text.removeRange(cursorPosition - 1, cursorPosition)
+            phoneNumberET.setText(modifiedText)
+            phoneNumberET.setSelection(cursorPosition - 1)
+        }
+    }
+
+    fun buttonclick(){
+        button1.setOnClickListener {
+            phoneNumberET.append("1")
+        }
+        button2.setOnClickListener {
+            phoneNumberET.append("2")
+        }
+        button3.setOnClickListener {
+            phoneNumberET.append("3")
+        }
+        button4.setOnClickListener {
+            phoneNumberET.append("4")
+        }
+        button5.setOnClickListener {
+            phoneNumberET.append("5")
+        }
+        button6.setOnClickListener {
+            phoneNumberET.append("6")
+        }
+        button7.setOnClickListener {
+            phoneNumberET.append("7")
+        }
+        button8.setOnClickListener {
+            phoneNumberET.append("8")
+        }
+        button9.setOnClickListener {
+            phoneNumberET.append("9")
+        }
+        button0.setOnClickListener {
+            phoneNumberET.append("0")
+        }
+    }
+
+
+
     private fun init(){
         mProgressBar = findViewById(R.id.phoneProgressBar)
         mProgressBar.visibility = View.INVISIBLE
         sendOTPBtn = findViewById(R.id.sendOTPBtn)
         phoneNumberET = findViewById(R.id.phoneEditTextNumber)
         auth = FirebaseAuth.getInstance()
+        button1 = findViewById(R.id.button)
+        button2 = findViewById(R.id.button2)
+        button3 = findViewById(R.id.button3)
+        button4 = findViewById(R.id.button4)
+        button5 = findViewById(R.id.button5)
+        button6 = findViewById(R.id.button6)
+        button7 = findViewById(R.id.button8)
+        button8 = findViewById(R.id.button9)
+        button9 = findViewById(R.id.button10)
+        button0 = findViewById(R.id.button11)
+        backspace = findViewById(R.id.backspace)
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -77,7 +152,7 @@ class PhoneActivity : AppCompatActivity() {
     }
 
     private fun sendToMain(){
-        startActivity(Intent(this , MainActivity::class.java))
+        startActivity(Intent(this , MainActivity2::class.java))
     }
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -127,7 +202,8 @@ class PhoneActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (auth.currentUser != null){
-            startActivity(Intent(this , MainActivity::class.java))
+            startActivity(Intent(this , MainActivity2::class.java))
+            finish()
         }
 
     }
