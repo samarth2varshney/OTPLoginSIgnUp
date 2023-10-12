@@ -51,10 +51,10 @@ class PhoneActivity : AppCompatActivity() {
                     number = "+91$number"
                     mProgressBar.visibility = View.VISIBLE
                     val options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber(number)       // Phone number to verify
-                        .setTimeout(0L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+                        .setPhoneNumber(number)
+                        .setTimeout(0L, TimeUnit.SECONDS)
+                        .setActivity(this)
+                        .setCallbacks(callbacks)
                         .build()
                     PhoneAuthProvider.verifyPhoneNumber(options)
 
@@ -157,19 +157,10 @@ class PhoneActivity : AppCompatActivity() {
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            // This callback will be invoked in two situations:
-            // 1 - Instant verification. In some cases the phone number can be instantly
-            //     verified without needing to send or enter a verification code.
-            // 2 - Auto-retrieval. On some devices Google Play services can automatically
-            //     detect the incoming verification SMS and perform verification without
-            //     user action.
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // This callback is invoked in an invalid request for verification is made,
-            // for instance if the the phone number format is not valid.
-
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Invalid request
                 Log.d("TAG", "onVerificationFailed: ${e.toString()}")
@@ -185,10 +176,6 @@ class PhoneActivity : AppCompatActivity() {
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken
         ) {
-            // The SMS verification code has been sent to the provided phone number, we
-            // now need to ask the user to enter the code and then construct a credential
-            // by combining the code with a verification ID.
-            // Save verification ID and resending token so we can use them later
             val intent = Intent(this@PhoneActivity , OPTActivity::class.java)
             intent.putExtra("OTP" , verificationId)
             intent.putExtra("resendToken" , token)

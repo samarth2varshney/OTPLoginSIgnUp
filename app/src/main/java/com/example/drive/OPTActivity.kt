@@ -70,7 +70,6 @@ class OPTActivity : AppCompatActivity() {
         }
 
         verifyBtn.setOnClickListener {
-            //collect otp from all the edit texts
             val typedOTP =
                 (inputOTP1.text.toString() + inputOTP2.text.toString() + inputOTP3.text.toString()
                         + inputOTP4.text.toString() + inputOTP5.text.toString() + inputOTP6.text.toString())
@@ -88,7 +87,6 @@ class OPTActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please Enter OTP", Toast.LENGTH_SHORT).show()
             }
-
 
         }
     }
@@ -120,7 +118,6 @@ class OPTActivity : AppCompatActivity() {
         val otpPatter = Pattern.compile("(|^)\\d{6}")
         val matcher = otpPatter.matcher(message)
         if(matcher.find()){
-            Toast.makeText(this,matcher.group(0),Toast.LENGTH_LONG).show()
             val otp:String = matcher.group(0)
             inputOTP1.setText("${otp[0]}")
             inputOTP2.setText("${otp[1]}")
@@ -128,8 +125,24 @@ class OPTActivity : AppCompatActivity() {
             inputOTP4.setText("${otp[3]}")
             inputOTP5.setText("${otp[4]}")
             inputOTP6.setText("${otp[5]}")
-        }
 
+            val typedOTP =
+                (inputOTP1.text.toString() + inputOTP2.text.toString() + inputOTP3.text.toString()
+                        + inputOTP4.text.toString() + inputOTP5.text.toString() + inputOTP6.text.toString())
+
+            if (typedOTP.isNotEmpty()) {
+                if (typedOTP.length == 6) {
+                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                        OTP, typedOTP
+                    )
+                    progressBar.visibility = View.VISIBLE
+                    signInWithPhoneAuthCredential(credential)
+                } else {
+                    Toast.makeText(this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
     }
 
     private fun registerBroadcastReciver(){
@@ -291,15 +304,11 @@ class OPTActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-
                     Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
                     sendToMain()
                 } else {
-                    // Sign in failed, display a message and update the UI
                     Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
                     }
                 }
                 progressBar.visibility = View.VISIBLE
@@ -363,8 +372,8 @@ class OPTActivity : AppCompatActivity() {
                 R.id.otpEditText4 -> if (text.length == 1) inputOTP5.requestFocus() else if (text.isEmpty()) inputOTP3.requestFocus()
                 R.id.otpEditText5 -> if (text.length == 1) inputOTP6.requestFocus() else if (text.isEmpty()) inputOTP4.requestFocus()
                 R.id.otpEditText6 -> if (text.isEmpty()) inputOTP5.requestFocus()
-
             }
+
         }
     }
 

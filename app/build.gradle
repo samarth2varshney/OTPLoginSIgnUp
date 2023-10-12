@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.example.drive'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.drive"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
         compileSdkPreview = "UpsideDownCake"
@@ -53,11 +53,19 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.7.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //sms broadcast reciever
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.0'
+
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
+    //custom youtube_player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 }
